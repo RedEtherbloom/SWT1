@@ -32,3 +32,7 @@ bin/
 # Windows
 Thumbs.db
 /.recommenders/
+
+# Intellij
+.idea/
+*.iml
