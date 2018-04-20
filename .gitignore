@@ -36,3 +36,6 @@ Thumbs.db
 # Intellij
 .idea/
 *.iml
+
+# Maven
+target/
