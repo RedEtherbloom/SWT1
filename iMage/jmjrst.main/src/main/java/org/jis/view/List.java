@@ -76,7 +76,7 @@ public class List extends JScrollPane {
             {
               try
               {
-                t.setThumb(new Thumbnail((File)selected_values[0], 220,165));
+                t.setThumb(new Thumbnail((File)selected_values[0], 220, 165));
               }
               catch (Exception ex)
               {
