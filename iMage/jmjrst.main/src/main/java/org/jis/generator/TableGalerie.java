@@ -376,11 +376,12 @@ public class TableGalerie {
 
     sb.append("      <td>\n");
 
-    if (next)
+    if (next) {
       sb.append("       <h1><a href=\"image" + (t + 1) + ".html\">&gt;</a></h1>\n");
-    else
+    } else {
       sb.append("       &nbsp;\n");
-
+    }
+      
     sb.append("      </td>\n");
 
     sb.append("     </tr>\n");
