@@ -176,8 +176,7 @@ public class Generator {
             return f.isDirectory() || f.getName().toLowerCase().endsWith(".zip");
           }
 
-          public String getDescription()
-          {
+          public String getDescription() {
             return "ZIP-Datei";
           }
         });
