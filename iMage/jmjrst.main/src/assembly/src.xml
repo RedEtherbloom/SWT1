@@ -9,8 +9,18 @@
 	</formats>
 	<fileSets>
 		<fileSet>
+			<useDefaultExcludes>false</useDefaultExcludes>
+			<directory>${project.basedir}/../../</directory>
+			<includes>
+				<include>.gitignore</include>
+			</includes>	
+		</fileSet>	
+
+		<fileSet>
 			<includes>
 				<include>pom.xml</include>
+				<include>LICENSE</include>
+				<include>*.launch</include>
 			</includes>
 		</fileSet>
 
