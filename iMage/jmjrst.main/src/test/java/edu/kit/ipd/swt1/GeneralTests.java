@@ -20,13 +20,27 @@ import org.junit.Test;
 public class GeneralTests {
 	private Generator generator;
 	private BufferedImage image;
-
+	
 	/**
 	 * Inits required objects for testing
+	 * @throws IOException when the picture.jpg is missing
 	 */
 	@Before 
-	public void setUp() throws IOException{
+	public void setUp() throws IOException {
 		generator = new Generator(null, 0);
-		image = ImageIO.read(new File("src/test/resources/picture.jpg"));
+		image = GeneralTestsHelpers.loadReferenceImage();
+	}
+	
+	@Test
+	public void testRotateImage1() throws IOException {
+		BufferedImage temp = GeneralTestsHelpers.loadReferenceImage();
+		if (!GeneralTestsHelpers.compareImages(image, generator.rotateImage(temp, 0))) {
+			fail("RotateImage1: The images are not equal");
+		}
+	}
+	
+	@Test
+	public void testRotateImage2() {
+		assertEquals(null, generator.rotateImage(null, 0));
 	}
 }	
