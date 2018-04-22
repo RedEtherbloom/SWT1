@@ -2,16 +2,13 @@ package edu.kit.ipd.swt1;
 
 import org.jis.generator.Generator;
 
-import static org.junit.Assert.*;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * @author Simon Rätzer(2061421)
@@ -31,6 +28,10 @@ public class GeneralTests {
 		image = GeneralTestsHelpers.loadReferenceImage();
 	}
 	
+	/**
+	 * Rotates an image by 0 degrees and checks if it stays the same
+	 * @throws IOException if the Image does not exist
+	 */
 	@Test
 	public void testRotateImage1() throws IOException {
 		BufferedImage temp = GeneralTestsHelpers.loadReferenceImage();
@@ -39,6 +40,9 @@ public class GeneralTests {
 		}
 	}
 	
+	/**
+	 * Rotates a null-image to see if the code does work for that
+	 */
 	@Test
 	public void testRotateImage2() {
 		assertEquals(null, generator.rotateImage(null, 0));
