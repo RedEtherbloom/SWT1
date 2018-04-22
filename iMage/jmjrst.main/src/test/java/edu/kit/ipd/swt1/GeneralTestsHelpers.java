@@ -96,6 +96,32 @@ public final class GeneralTestsHelpers {
 	}
 	
 	/**
+	 * @param a image to test with
+	 * @param generator Generator for rotation
+	 * @return true, if the height, width and pixels are the same after the rotation
+	 */
+	public static boolean sameImageAfter180(BufferedImage a, Generator generator) {
+		BufferedImage b = generator.rotateImage(a, Math.toRadians(180));
+		
+		int height = a.getHeight();
+		int width  =  a.getWidth();
+		
+		if (height != b.getHeight() || width != b.getWidth()) {
+			return false;
+		}
+		
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if (a.getRGB(i, j) != b.getRGB(width - i - 1, height - 1 - j)) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * @param a Normal buffered Image
 	 * @param generator Generator-Object
 	 * @return Returns if the they both have the same pixeladata

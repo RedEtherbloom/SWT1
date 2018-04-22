@@ -51,12 +51,23 @@ public class GeneralTests {
 	}
 	
 	/**
+	 * Rotates the image by 180 Degrees and checks if they are still the same
+	 */
+	@Test
+	public void testRotate180Degree() {
+		if (!GeneralTestsHelpers.sameImageAfter180(image, generator)) {
+			fail("180 Degree-Rotate: Images differ!");
+		}
+	}
+	
+	
+	/**
 	 * Rotates the image by 270 Degrees and checks if they are still the same
 	 */
 	@Test
 	public void testRotate270Degree() {
 		if (!GeneralTestsHelpers.sameImageAfter270(image, generator)) {
-			fail("90 Degree-Rotate: Images differ!");
+			fail("270 Degree-Rotate: Images differ!");
 		}
 	}
 	
