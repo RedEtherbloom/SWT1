@@ -47,4 +47,12 @@ public class GeneralTests {
 	public void testRotateImage2() {
 		assertEquals(null, generator.rotateImage(null, 0));
 	}
+	
+	/**
+	 * Tries to rotate an image in a forbidden way. Should throw in {@link IllegalArgumentException}
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRotateImageExcep1() {
+		generator.rotateImage(image, 0.5);
+	}
 }	
