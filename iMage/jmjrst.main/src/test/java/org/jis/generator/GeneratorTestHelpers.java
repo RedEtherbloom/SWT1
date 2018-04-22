@@ -1,4 +1,4 @@
-package edu.kit.ipd.swt1;
+package org.jis.generator;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -14,12 +14,12 @@ import javax.imageio.ImageIO;
  * @author Simon Rätzer(2061421)
  * Encapsulates required functions to keep the GeneralTests-Classs clean
  */
-public final class GeneralTestsHelpers {
+public final class GeneratorTestHelpers {
 	
 	/**
 	 * Just for checkstyle reasons
 	 */
-	private GeneralTestsHelpers() {
+	private GeneratorTestHelpers() {
 	}
 	
 	/**

@@ -1,6 +1,4 @@
-package edu.kit.ipd.swt1;
-
-import org.jis.generator.Generator;
+package org.jis.generator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -16,7 +14,7 @@ import java.io.IOException;
  * @author Simon Rätzer(2061421)
  * Class, which runs general core-tests for e.g the generator class
  */
-public class GeneralTests {
+public class GeneratorTest {
 	private Generator generator;
 	private BufferedImage image;
 	
@@ -27,7 +25,7 @@ public class GeneralTests {
 	@Before 
 	public void setUp() throws IOException {
 		generator = new Generator(null, 0);
-		image = GeneralTestsHelpers.loadReferenceImage();
+		image = GeneratorTestHelpers.loadReferenceImage();
 	}
 	
 	/**
@@ -37,7 +35,7 @@ public class GeneralTests {
 	@After
 	public void tearDown() throws IOException {
 		if (image != null) {
-			GeneralTestsHelpers.saveBufferedImage(image);
+			GeneratorTestHelpers.saveBufferedImage(image);
 		}
 	}
 	
@@ -47,8 +45,8 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotateImage1() {
-		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
-		if (!GeneralTestsHelpers.compareImages(image, generator.rotateImage(temp, 0))) {
+		BufferedImage temp = GeneratorTestHelpers.cloneImage(image);
+		if (!GeneratorTestHelpers.compareImages(image, generator.rotateImage(temp, 0))) {
 			fail("RotateImage1: The images are not equal");
 		}
 	}
@@ -58,10 +56,10 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotate90Degree() {
-		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
+		BufferedImage temp = GeneratorTestHelpers.cloneImage(image);
 		image = generator.rotateImage(image, Generator.ROTATE_90);
 		
-		if (!GeneralTestsHelpers.sameImageAfter90(temp, image)) {
+		if (!GeneratorTestHelpers.sameImageAfter90(temp, image)) {
 			fail("90 Degree-Rotate: Images differ!");
 		}
 	}
@@ -71,10 +69,10 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotate180Degree() {
-		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
+		BufferedImage temp = GeneratorTestHelpers.cloneImage(image);
 		image = generator.rotateImage(image, Generator.ROTATE_180);
 		
-		if (!GeneralTestsHelpers.sameImageAfter180(temp, image)) {
+		if (!GeneratorTestHelpers.sameImageAfter180(temp, image)) {
 			fail("180 Degree-Rotate: Images differ!");
 		}
 	}
@@ -85,10 +83,10 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotate270Degree() {
-		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
+		BufferedImage temp = GeneratorTestHelpers.cloneImage(image);
 		image = generator.rotateImage(image, Generator.ROTATE_270);
 		
-		if (!GeneralTestsHelpers.sameImageAfter270(temp, image)) {
+		if (!GeneratorTestHelpers.sameImageAfter270(temp, image)) {
 			fail("270 Degree-Rotate: Images differ!");
 		}
 	}
