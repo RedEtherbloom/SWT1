@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.jis.generator.Generator;
+
 /**
  * @author Simon Rätzer(2061421)
  * Encapsulates required functions to keep the GeneralTests-Classs clean
@@ -70,10 +72,11 @@ public final class GeneralTestsHelpers {
 	
 	/**
 	 * @param a Normal buffered Image
-	 * @param b By 90 degrees rotated Image
+	 * @param generator Generator Object
 	 * @return Returns if the they both have the same pixeladata
 	 */
-	public static boolean sameImageAfter90(BufferedImage a, BufferedImage b) {
+	public static boolean sameImageAfter90(BufferedImage a, Generator generator) {
+		BufferedImage b = generator.rotateImage(a, Generator.ROTATE_90);
 		int height = a.getHeight();
 		int width  = a.getWidth();
 		
@@ -83,7 +86,7 @@ public final class GeneralTestsHelpers {
 		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (a.getRGB(i, j) != b.getRGB(height - j, i)) {
+				if (a.getRGB(i, j) != b.getRGB(height - 1 -  j, i)) {
 					return false;
 				}
 			}
@@ -94,10 +97,11 @@ public final class GeneralTestsHelpers {
 	
 	/**
 	 * @param a Normal buffered Image
-	 * @param b By 270 degrees rotated Image
+	 * @param generator Generator-Object
 	 * @return Returns if the they both have the same pixeladata
 	 */
-	public static boolean sameImageAfter270(BufferedImage a, BufferedImage b) {
+	public static boolean sameImageAfter270(BufferedImage a, Generator generator) {
+		BufferedImage b = generator.rotateImage(a, Generator.ROTATE_270);
 		int height = a.getHeight();
 		int width  = a.getWidth();
 		
@@ -107,7 +111,7 @@ public final class GeneralTestsHelpers {
 		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (a.getRGB(i, j) != b.getRGB(j, width - i)) {
+				if (a.getRGB(i, j) != b.getRGB(j, width - 1 - i)) {
 					return false;
 				}
 			}

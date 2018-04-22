@@ -33,10 +33,30 @@ public class GeneralTests {
 	 * @throws IOException if the Image does not exist
 	 */
 	@Test
-	public void testRotateImage1() throws IOException {
-		BufferedImage temp = GeneralTestsHelpers.loadReferenceImage();
+	public void testRotateImage1() {
+		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
 		if (!GeneralTestsHelpers.compareImages(image, generator.rotateImage(temp, 0))) {
 			fail("RotateImage1: The images are not equal");
+		}
+	}
+	
+	/**
+	 * Rotates the image by 90 Degrees and checks if they are still the same
+	 */
+	@Test
+	public void testRotate90Degree() {
+		if (!GeneralTestsHelpers.sameImageAfter90(image, generator)) {
+			fail("90 Degree-Rotate: Images differ!");
+		}
+	}
+	
+	/**
+	 * Rotates the image by 270 Degrees and checks if they are still the same
+	 */
+	@Test
+	public void testRotate270Degree() {
+		if (!GeneralTestsHelpers.sameImageAfter270(image, generator)) {
+			fail("90 Degree-Rotate: Images differ!");
 		}
 	}
 	
