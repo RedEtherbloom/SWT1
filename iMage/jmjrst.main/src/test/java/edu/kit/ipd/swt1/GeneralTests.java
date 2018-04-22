@@ -4,7 +4,9 @@ import org.jis.generator.Generator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
@@ -26,6 +28,17 @@ public class GeneralTests {
 	public void setUp() throws IOException {
 		generator = new Generator(null, 0);
 		image = GeneralTestsHelpers.loadReferenceImage();
+	}
+	
+	/**
+	 * Saves the modified image after 
+	 * @throws IOException if a writing error occurs
+	 */
+	@After
+	public void tearDown() throws IOException {
+		if (image != null) {
+			GeneralTestsHelpers.saveBufferedImage(image);
+		}
 	}
 	
 	/**
@@ -85,6 +98,7 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotateImage2() {
+		image = null;
 		assertEquals(null, generator.rotateImage(null, 0));
 	}
 	

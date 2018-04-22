@@ -5,11 +5,10 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
-
-import org.jis.generator.Generator;
 
 /**
  * @author Simon Rätzer(2061421)
@@ -29,6 +28,24 @@ public final class GeneralTestsHelpers {
 	 */
 	public static BufferedImage loadReferenceImage() throws IOException {
 		return ImageIO.read(new File("src/test/resources/picture.jpg"));
+	}
+	
+	/**
+	 * Writes a Buffered Image back to the test directory
+	 * @param image Image to write
+	 * @throws IOException if an writing exception occurs
+	 */
+	public static void saveBufferedImage(BufferedImage image) throws IOException {
+		final String directory   = "target/dataTest";
+		final String baseName    = "rotatedPicture_";
+		final String format      = "jpg";
+		String currentTime = new SimpleDateFormat("HHmmss_SSS").format(new Date());
+		
+		File dir = new File(directory);
+		dir.mkdirs();
+		
+		File file = new File(directory + "/" + baseName + currentTime + "." + format);
+		ImageIO.write(image, format, file);
 	}
 	
 	/**
