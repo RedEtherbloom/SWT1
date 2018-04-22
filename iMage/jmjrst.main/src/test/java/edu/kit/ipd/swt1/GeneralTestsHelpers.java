@@ -5,6 +5,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
 
@@ -72,11 +73,10 @@ public final class GeneralTestsHelpers {
 	
 	/**
 	 * @param a Normal buffered Image
-	 * @param generator Generator Object
+	 * @param b 90-Degree rotated Picture
 	 * @return Returns if the they both have the same pixeladata
 	 */
-	public static boolean sameImageAfter90(BufferedImage a, Generator generator) {
-		BufferedImage b = generator.rotateImage(a, Generator.ROTATE_90);
+	public static boolean sameImageAfter90(BufferedImage a, BufferedImage b) {
 		int height = a.getHeight();
 		int width  = a.getWidth();
 		
@@ -97,11 +97,10 @@ public final class GeneralTestsHelpers {
 	
 	/**
 	 * @param a image to test with
-	 * @param generator Generator for rotation
+	 * @param b 180-Degree rotated Picture
 	 * @return true, if the height, width and pixels are the same after the rotation
 	 */
-	public static boolean sameImageAfter180(BufferedImage a, Generator generator) {
-		BufferedImage b = generator.rotateImage(a, Math.toRadians(180));
+	public static boolean sameImageAfter180(BufferedImage a, BufferedImage b) {
 		
 		int height = a.getHeight();
 		int width  =  a.getWidth();
@@ -123,11 +122,10 @@ public final class GeneralTestsHelpers {
 	
 	/**
 	 * @param a Normal buffered Image
-	 * @param generator Generator-Object
+	 * @param b 270-Degree rotated picture
 	 * @return Returns if the they both have the same pixeladata
 	 */
-	public static boolean sameImageAfter270(BufferedImage a, Generator generator) {
-		BufferedImage b = generator.rotateImage(a, Generator.ROTATE_270);
+	public static boolean sameImageAfter270(BufferedImage a, BufferedImage b) {
 		int height = a.getHeight();
 		int width  = a.getWidth();
 		

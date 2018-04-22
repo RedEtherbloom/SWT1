@@ -45,7 +45,10 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotate90Degree() {
-		if (!GeneralTestsHelpers.sameImageAfter90(image, generator)) {
+		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
+		image = generator.rotateImage(image, Generator.ROTATE_90);
+		
+		if (!GeneralTestsHelpers.sameImageAfter90(temp, image)) {
 			fail("90 Degree-Rotate: Images differ!");
 		}
 	}
@@ -55,7 +58,10 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotate180Degree() {
-		if (!GeneralTestsHelpers.sameImageAfter180(image, generator)) {
+		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
+		image = generator.rotateImage(image, Generator.ROTATE_180);
+		
+		if (!GeneralTestsHelpers.sameImageAfter180(temp, image)) {
 			fail("180 Degree-Rotate: Images differ!");
 		}
 	}
@@ -66,7 +72,10 @@ public class GeneralTests {
 	 */
 	@Test
 	public void testRotate270Degree() {
-		if (!GeneralTestsHelpers.sameImageAfter270(image, generator)) {
+		BufferedImage temp = GeneralTestsHelpers.cloneImage(image);
+		image = generator.rotateImage(image, Generator.ROTATE_270);
+		
+		if (!GeneralTestsHelpers.sameImageAfter270(temp, image)) {
 			fail("270 Degree-Rotate: Images differ!");
 		}
 	}
