@@ -1,26 +1,35 @@
 package org.jis.generator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.jis.options.Options;
-
-import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
+import org.junit.Test;
+
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
 import java.util.Vector;
 
-import javax.imageio.ImageIO;
+import org.jis.Main;
+import org.jis.Messages;
 
 /**
  * More complex tests, with 35% coverage
  * @author Simon Rätzer (2061421)
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ComplexGeneratorTest {
 	private Generator generator;
 	private BufferedImage image;
@@ -30,15 +39,20 @@ public class ComplexGeneratorTest {
 	 */
 	@Rule
 	public TemporaryFolder folder = new TemporaryFolder();
-	
+
+	@Mock
+	Main m;
+
 	/**
 	 * Prepares the Test-Env
 	 * @throws IOException if the refence image is missing
 	 */
 	@Before
-	public void setUp() throws IOException {
-		generator = new Generator(null, 0);
+	public void setUp() throws IOException  {
+		generator = new Generator(m, 0);
 		image = GeneratorTestHelpers.loadReferenceImage();
+		
+		m.mes = new Messages(Locale.ENGLISH);
 	}
 
 	/**
@@ -131,6 +145,41 @@ public class ComplexGeneratorTest {
 	}
 
 	/**
+	 * Tests if it works without Antialising
+	 * @throws IOException if the generate-method could not write
+	 */
+	@Test
+	public void generateImageTest6() throws IOException {
+		File img    = new File(GeneratorTestHelpers.referencePath);
+		File dir    = folder.getRoot();
+		
+		String praefix = "pointless_";
+		
+		Options.getInstance().setAntialiasing(false);
+		
+		File ret = generator.generateImage(img, dir, false, image.getWidth(), image.getHeight(), praefix);
+		assertTrue(ret.exists());
+	}
+	
+	/**
+	 * Tests if it works without Copying Metadata
+	 * @throws IOException if the generate-method could not write
+	 */
+	@Test
+	public void generateImageTest7() throws IOException {
+		File img    = new File(GeneratorTestHelpers.referencePath);
+		File dir    = folder.getRoot();
+		
+		String praefix = "pointless_";
+		
+		Options.getInstance().setCopyMetadata(false);
+		
+		File ret = generator.generateImage(img, dir, false, image.getWidth(), image.getHeight(), praefix);
+		assertTrue(ret.exists());
+	}
+		
+	
+	/**
 	 * Rotates an image by 0 degrees and checks if it stays the same
 	 * @throws IOException if the Image does not exist
 	 */
@@ -213,5 +262,40 @@ public class ComplexGeneratorTest {
 		
 		generator.createZip(temp, files);
 		assertEquals(true, temp.exists());
+	}
+	
+	/**
+	 * Tests the resize method with 10 files
+	 * @throws IOException if the temp-dir could not be created 
+	 */
+	@Test
+	public void generateTextTest1() throws IOException {
+		
+		File input = folder.newFolder("input");
+		File output = folder.newFolder("output");
+		
+		for (int i = 0; i < 10; i++) {
+			File temp = new File(input, "picture" + i + ".jpg");
+			ImageIO.write(image, "jpg", temp);
+		}
+		
+		generator.generateText(input, output, image.getWidth() / 2, image.getHeight());
+		
+		assertEquals(10, output.listFiles().length);
+	}
+	
+	/**
+	 * Tests the resize method with a single file
+	 * @throws IOException if the temp-dir could not be created
+	 */
+	@Test
+	public void generateTextTest2() throws IOException {
+		File input = folder.newFile("input.jpg");
+		ImageIO.write(image, "jpg", input);
+		File output = folder.newFile("output.jpg");
+		
+		generator.generateText(input, output, image.getWidth() / 2, image.getHeight());
+		
+		assertTrue(output.exists());
 	}
 }
