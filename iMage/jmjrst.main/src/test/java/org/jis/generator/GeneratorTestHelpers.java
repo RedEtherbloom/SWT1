@@ -17,6 +17,16 @@ import javax.imageio.ImageIO;
 public final class GeneratorTestHelpers {
 	
 	/**
+	 * Path to the Reference-Image used for testing
+	 */
+	public static final String referencePath = "src/test/resources/picture.jpg";
+	/**
+	 * Path to the folder, where output should be stored
+	 */
+	public static final String directory   = "target/dataTest";
+	
+	
+	/**
 	 * Just for checkstyle reasons
 	 */
 	private GeneratorTestHelpers() {
@@ -27,22 +37,28 @@ public final class GeneratorTestHelpers {
 	 * @throws IOException if picture.jpg does not exist
 	 */
 	public static BufferedImage loadReferenceImage() throws IOException {
-		return ImageIO.read(new File("src/test/resources/picture.jpg"));
+		return ImageIO.read(new File(referencePath));
 	}
 	
+	/**
+	 * Creates the reference-dir (if it does not exist)
+	 */
+	public static void createTestDir() {
+		File dir = new File(directory);
+		dir.mkdirs();
+	}
+
 	/**
 	 * Writes a Buffered Image back to the test directory
 	 * @param image Image to write
 	 * @throws IOException if an writing exception occurs
 	 */
 	public static void saveBufferedImage(BufferedImage image) throws IOException {
-		final String directory   = "target/dataTest";
 		final String baseName    = "rotatedPicture_";
 		final String format      = "jpg";
 		String currentTime = new SimpleDateFormat("HHmmss_SSS").format(new Date());
 		
-		File dir = new File(directory);
-		dir.mkdirs();
+		createTestDir();
 		
 		File file = new File(directory + "/" + baseName + currentTime + "." + format);
 		ImageIO.write(image, format, file);
